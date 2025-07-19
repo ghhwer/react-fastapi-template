@@ -37,7 +37,7 @@ The purpose of this project is to provide a basic template for building modern w
    ```bash
    cd backend && uv run uvicorn main:app --reload
    ```
-. Start the frontend development server:
+5. Start the frontend development server:
    ```bash
    cd frontend && npm run dev
    ```
