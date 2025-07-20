@@ -10,6 +10,7 @@ from application_logging.request_logger_middleware import (
     LoggerCorrelationIdMiddleware
 )
 import settings
+from repository.database import init_models
 
 # Setup FastAPI
 config = {
@@ -31,6 +32,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.add_middleware(LoggerCorrelationIdMiddleware)
+
+# Database things
+# For async you may need to wait on this function to return.
+init_models()
 
 # Mout Routes
 app.mount(f'{settings.API_ROUTE_PREFIX}/sub_controller_a', sub_controller_a_route)

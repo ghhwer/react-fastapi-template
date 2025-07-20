@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "asgi-correlation-id>=4.3.4",
+    "duckdb-engine>=0.17.0",
     "fastapi>=0.116.1",
     "python-logstash>=0.4.8",
     "uvicorn>=0.35.0",
