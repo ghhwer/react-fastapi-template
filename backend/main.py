@@ -1,5 +1,6 @@
 import logging
 from fastapi import FastAPI
+from repositories.database import init_models # Repository initialization needs to come first
 from fastapi.responses import RedirectResponse
 from controllers.users_controller import route as user_route
 from controllers.posts_controller import route as post_route
@@ -10,7 +11,6 @@ from application_logging.request_logger_middleware import (
     LoggerCorrelationIdMiddleware
 )
 import settings
-from repositories.database import init_models
 from app_lifespan import lifespan
 
 # Database things
