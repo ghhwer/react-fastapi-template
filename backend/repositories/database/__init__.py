@@ -1,7 +1,7 @@
 from .database import engine
 from .base import Base
-from model.user import User  # noqa: F401  # Import to register the model
-from model.post import Post  # noqa: F401  # Import to register the model
+from models.user import User  # noqa: F401  # Import to register the models
+from models.post import Post  # noqa: F401  # Import to register the models
 
 def init_models():
     """Initialize the database models."""

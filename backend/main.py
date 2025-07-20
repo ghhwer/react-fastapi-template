@@ -1,8 +1,8 @@
 import logging
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from controller.sub_controller_a import route as sub_controller_a_route
-from controller.sub_controller_b import route as sub_controller_b_route
+from controllers.sub_controller_a import route as sub_controller_a_route
+from controllers.sub_controller_b import route as sub_controller_b_route
 from fastapi.middleware.cors import CORSMiddleware
 from application_logging.setup import setup_logging
 from application_logging.request_logger_middleware import (
@@ -10,7 +10,7 @@ from application_logging.request_logger_middleware import (
     LoggerCorrelationIdMiddleware
 )
 import settings
-from repository.database import init_models
+from repositories.database import init_models
 from app_lifespan import lifespan
 
 # Database things
