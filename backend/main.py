@@ -1,8 +1,8 @@
 import logging
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from controllers.sub_controller_a import route as sub_controller_a_route
-from controllers.sub_controller_b import route as sub_controller_b_route
+from controllers.users_controller import route as user_route
+from controllers.posts_controller import route as post_route
 from fastapi.middleware.cors import CORSMiddleware
 from application_logging.setup import setup_logging
 from application_logging.request_logger_middleware import (
@@ -40,8 +40,8 @@ app.add_middleware(
 app.add_middleware(LoggerCorrelationIdMiddleware)
 
 # Mout Routes
-app.mount(f'{settings.API_ROUTE_PREFIX}/sub_controller_a', sub_controller_a_route)
-app.mount(f'{settings.API_ROUTE_PREFIX}/sub_controller_b', sub_controller_b_route)
+app.mount(f'{settings.API_ROUTE_PREFIX}/users', user_route)
+app.mount(f'{settings.API_ROUTE_PREFIX}/posts', post_route)
 
 # Root endpoints
 @app.get("/")

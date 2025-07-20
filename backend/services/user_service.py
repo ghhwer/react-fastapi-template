@@ -5,6 +5,9 @@ from uuid import uuid4
 class UserService:
     def __init__(self, db: Session):
         self.db = db
+        
+    def get_all_users(self,):
+        return self.db.query(User).all()
 
     def get_user_by_external_auth_id(self, external_auth_id: str) -> User:
         """Get a user by email."""
