@@ -1,10 +1,8 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from application_logging import log_message, log_exception
+from application_logging import log_message
 from repositories.database.database import get_db_session
-from models.user import User
 from services.user_service import UserService
-from uuid import uuid4
 
 def app_start_database_things():
     with get_db_session() as db:
