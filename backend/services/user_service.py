@@ -16,4 +16,5 @@ class UserService:
     def create_new_user(self, name:str, surname:str, external_auth_id:str) -> User:
         user = User(id=str(uuid4()), name=name, surname=surname, external_auth_id=external_auth_id)
         self.db.add(user)
+        self.db.flush()
         return user

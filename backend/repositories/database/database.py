@@ -17,8 +17,11 @@ def get_db():
     db = session()
     try:
         yield db
-    finally:
         db.commit()
+    except Exception as e:
+        db.rollback()
+        raise e
+    finally:
         db.close()
 
 @contextmanager
@@ -27,11 +30,11 @@ def get_db_session():
     db = session()
     try:
         yield db
+        db.commit()
     except Exception as e:
         db.rollback()
         raise e
     finally:
-        db.commit()
         db.close()
 
 
