@@ -1,5 +1,7 @@
+from contextlib import contextmanager
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm.session import Session
 
 # Database connection URL
 SQLALCHEMY_DATABASE_URL = "duckdb:///./database.db"
@@ -8,18 +10,32 @@ SQLALCHEMY_DATABASE_URL = "duckdb:///./database.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 # Create a session maker
-Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def get_db():
     """Get a database session."""
-    db = Session()
+    db = session()
     try:
         yield db
     finally:
+        db.commit()
+        db.close()
+
+@contextmanager
+def get_db_session():
+    """Get a new database session."""
+    db = session()
+    try:
+        yield db
+    except Exception as e:
+        db.rollback()
+        raise e
+    finally:
+        db.commit()
         db.close()
 
 
-# For Async...
+# Foe Async...
 #from sqlalchemy import create_engine
 #from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 #from sqlalchemy.orm import sessionmaker

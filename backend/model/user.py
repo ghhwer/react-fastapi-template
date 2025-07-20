@@ -11,7 +11,5 @@ class User(Base):
     surname = Column(String)
     external_auth_id = Column(String, unique=True)
     
-    posts = relationship("Post", back_populates="posts")
-
     def __repr__(self):
-        return f"Bank(id={self.id}, name={self.name})"
+        return f"User(id={self.id}, name={self.name})"
